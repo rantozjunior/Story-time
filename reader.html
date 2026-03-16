@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading - Story Time</title>
+    <link rel="stylesheet" href="css/reader-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="reader-nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-home">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Home
+            </a>
+            
+            <h1 class="story-nav-title" id="currentStoryTitle">Story Time</h1>
+            
+            <button class="settings-button" id="settingsBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Reading Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+    </nav>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <h3>Reading Settings</h3>
+        
+        <div class="setting-group">
+            <label for="fontSizeSlider">Font Size</label>
+            <input type="range" id="fontSizeSlider" min="16" max="24" value="18" step="1">
+            <span id="fontSizeValue">18px</span>
+        </div>
+        
+        <div class="setting-group">
+            <label for="lineHeightSlider">Line Spacing</label>
+            <input type="range" id="lineHeightSlider" min="1.4" max="2.2" value="1.8" step="0.1">
+            <span id="lineHeightValue">1.8</span>
+        </div>
+        
+        <div class="setting-group">
+            <label>Theme</label>
+            <div class="theme-buttons">
+                <button class="theme-btn active" data-theme="dark">Dark</button>
+                <button class="theme-btn" data-theme="sepia">Sepia</button>
+                <button class="theme-btn" data-theme="light">Light</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Reading Area -->
+    <main class="reader-main">
+        <div class="reader-container">
+            <!-- Chapter Info -->
+            <div class="chapter-header">
+                <div class="chapter-info">
+                    <span class="chapter-number" id="chapterNumber">Chapter 1</span>
+                    <h2 class="chapter-title" id="chapterTitle">Loading...</h2>
+                </div>
+                
+                <!-- Audio Player -->
+                <div class="audio-player" id="audioPlayer">
+                    <button class="audio-btn" id="playPauseBtn">
+                        <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 3L19 12L5 21V3Z" fill="currentColor"/>
+                        </svg>
+                        <svg class="pause-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect x="6" y="4" width="4" height="16" fill="currentColor"/>
+                            <rect x="14" y="4" width="4" height="16" fill="currentColor"/>
+                        </svg>
+                    </button>
+                    
+                    <div class="audio-progress">
+                        <div class="audio-time" id="currentTime">0:00</div>
+                        <input type="range" class="audio-seek" id="audioSeek" min="0" max="100" value="0">
+                        <div class="audio-time" id="totalTime">0:00</div>
+                    </div>
+                    
+                    <audio id="audioElement"></audio>
+                </div>
+            </div>
+
+            <!-- Chapter Content -->
+            <article class="chapter-content" id="chapterContent">
+                <p>Loading chapter content...</p>
+            </article>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-navigation">
+                <button class="nav-btn prev-btn" id="prevChapter">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    Previous Chapter
+                </button>
+                
+                <button class="chapter-list-btn" id="chapterListBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/>
+                        <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2"/>
+                        <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    All Chapters
+                </button>
+                
+                <button class="nav-btn next-btn" id="nextChapter">
+                    Next Chapter
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Chapter List Modal -->
+    <div class="modal-overlay" id="chapterModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Chapters</h3>
+                <button class="modal-close" id="closeModal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="chapter-list" id="chapterList">
+                <!-- Chapters will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/reader-script.js"></script>
+</body>
+</html>
